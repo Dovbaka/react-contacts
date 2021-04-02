@@ -37,6 +37,7 @@ export const signOut = () => {
 
 export const createNewContact = (contactName: string, contactPhone: string) => {
     const storeData = store.getState().AuthReducer;
+    const contactImageId = Math.floor(Math.random() * 350) + 1;
 
     localStorage.setItem(storeData.userName, JSON.stringify(
         {
@@ -46,14 +47,14 @@ export const createNewContact = (contactName: string, contactPhone: string) => {
                     id: Date.now(),
                     contactName: contactName,
                     contactPhone: contactPhone,
-                    contactImageId: Math.floor(Math.random() * 350) + 1
+                    contactImageId: contactImageId
                 }
             ]
         }
     ));
     return {
         type: 'CREATE_NEW_CONTACT' as const,
-        payload: {contactName, contactPhone}
+        payload: {contactName, contactPhone, contactImageId}
     };
 }
 

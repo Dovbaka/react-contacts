@@ -41,7 +41,7 @@ export const AuthReducer = (
                         id: Date.now(),
                         contactName: action.payload.contactName,
                         contactPhone: action.payload.contactPhone,
-                        contactImageId: Math.floor(Math.random() * 350) + 1
+                        contactImageId: action.payload.contactImageId
                     }
                 ]
             };

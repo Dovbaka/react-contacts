@@ -11,7 +11,7 @@ const ContactList: React.FC<PropsFromRedux> = (props) => {
     const history = useHistory();
     const location = useLocation();
     const [dialogueToOpen, setDialogueToOpen] = useState("");
-    const Contacts = [...props.contactList].map((el) => {
+    const Contacts = [...props.contactList].sort((a, b) => String(a.contactName) > String(b.contactName) ? 1 : -1).map((el) => {
             return (
                 <Grid key={el.id} item xs={12} sm={6} md={4} lg={3} xl={2} className={classes.productItem}>
                     <ContactItem contactId={el.id} contactName={el.contactName} imageId={el.contactImageId}
