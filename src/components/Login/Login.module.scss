@@ -1,0 +1,24 @@
+.loginWrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .loginContainer {
+    width: 320px;
+
+    .titleGridItem {
+      width: 100%;
+    }
+
+    .inputGridItem {
+      width: 100%;
+      margin-top: 22px;
+    }
+
+    .buttonGridItem {
+      width: 100%;
+      margin-top: 22px;
+    }
+  }
+}

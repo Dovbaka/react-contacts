@@ -1,0 +1,42 @@
+.createContactWrapper {
+  height: 100vh;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .contactContainer {
+    width: 320px;
+
+    .titleGridItem {
+      width: 100%;
+    }
+
+    .inputGridItem {
+      width: 100%;
+      margin-top: 22px;
+    }
+
+    .buttonGridItem {
+      width: 100%;
+      margin-top: 22px;
+      button:first-child {
+        margin-bottom: 22px;
+      }
+    }
+  }
+  .closeIcon {
+    position: absolute;
+    top: 37px;
+    right: 47px;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+
+    &:hover {
+      path {
+        fill: #fd2f2f;
+      }
+    }
+  }
+}
