@@ -11,15 +11,17 @@ const ContactList: React.FC<PropsFromRedux> = (props) => {
     const history = useHistory();
     const location = useLocation();
     const [dialogueToOpen, setDialogueToOpen] = useState("");
-    const Contacts = [...props.contactList].sort((a, b) => String(a.contactName) > String(b.contactName) ? 1 : -1).map((el) => {
-            return (
-                <Grid key={el.id} item xs={12} sm={6} md={4} lg={3} xl={2} className={classes.productItem}>
-                    <ContactItem contactId={el.id} contactName={el.contactName} imageId={el.contactImageId}
-                                 contactPhone={el.contactPhone}/>
-                </Grid>
-            );
-        }
-    );
+    const Contacts = [...props.contactList].sort((a, b) =>
+        String(a.contactName).toLocaleLowerCase() > String(b.contactName).toLocaleLowerCase() ? 1 : -1)
+        .map((el) => {
+                return (
+                    <Grid key={el.id} item xs={12} sm={6} md={4} lg={3} xl={2} className={classes.productItem}>
+                        <ContactItem contactId={el.id} contactName={el.contactName} imageId={el.contactImageId}
+                                     contactPhone={el.contactPhone}/>
+                    </Grid>
+                );
+            }
+        );
 
     const downloadCSV = () => {
         let csvContent = "data:text/csv;charset=utf-8,Name, Phone\n"
@@ -32,8 +34,8 @@ const ContactList: React.FC<PropsFromRedux> = (props) => {
         link.click();
     }
 
-    useEffect(() => {
-        switch (location.pathname.substring(location.pathname.lastIndexOf('/') + 1)) {
+    useEffect(() => { //set dialogue open status from current url
+        switch (location.pathname.substring(location.pathname.lastIndexOf('/') + 1)) {//extract last segment of url
             case "new":
                 setDialogueToOpen("new")
                 break;
@@ -49,7 +51,7 @@ const ContactList: React.FC<PropsFromRedux> = (props) => {
         <Grid container direction={"column"} className={classes.contactListWrapper}>
             <Grid item container direction={"column"}>
                 <Grid item className={classes.headerTitleGridItem}>
-                    <Typography variant={"h2"} noWrap className={classes.userName}>Hello, {props.userName}</Typography>
+                    <Typography variant={"h1"} noWrap className={classes.userName}>Hello, {props.userName}</Typography>
                     <CustomButton type={"button"}
                                   variant={"text"}
                                   textColor={"black"}
@@ -57,18 +59,22 @@ const ContactList: React.FC<PropsFromRedux> = (props) => {
                                       history.push("/login");
                                       props.signOut()
                                   }}>
-                        <Typography variant={"h2"}>Logout</Typography>
+                        <Typography variant={"h1"}>Logout</Typography>
                     </CustomButton>
                 </Grid>
                 <Grid item className={classes.headerButtonsGridItem}>
                     <CustomButton type={"button"}
                                   color={"secondary"}
                                   width={"240px"}
-                                  onClick={() => history.push("/new")}>New Contact</CustomButton>
+                                  onClick={() => history.push("/new")}>
+                        New Contact
+                    </CustomButton>
                     <CustomButton type={"button"}
                                   color={"secondary"}
                                   width={"240px"}
-                                  onClick={downloadCSV}>Download CSV</CustomButton>
+                                  onClick={downloadCSV}>
+                        Download CSV
+                    </CustomButton>
                 </Grid>
             </Grid>
             <Grid item container spacing={4} className={classes.contactsGridContainer}>

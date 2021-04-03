@@ -15,21 +15,20 @@ type PropsType = {
 
 const ContactItem = (props: PropsType) => {
     const history = useHistory();
-    const callToNumber = () => {
+
+    const callToNumber = () => {//Call functionality
         let link = document.createElement("a");
         link.setAttribute("href", "tel:" + props.contactPhone);
         link.click();
     }
+
     return <Box className={classes.contactItemBox}>
         <img className={classes.avatarImage}
              src={`https://picsum.photos/id/${props.imageId}/360/360`}
              alt={"avatar"}/>
         <Typography variant={"body1"} noWrap className={classes.contactName}>{props.contactName}</Typography>
-        <CustomButton type={"button"}
-                      color={"primary"}
-                      width={"100%"}
-                      className={classes.callButton}
-                      onClick={callToNumber}>
+        <CustomButton type={"button"} color={"primary"} width={"100%"}
+                      className={classes.callButton} onClick={callToNumber}>
             <PhoneIcon className={classes.phoneIcon}/>
             <Typography variant={"button"} className={classes.phoneNumber}>{props.contactPhone}</Typography>
         </CustomButton>

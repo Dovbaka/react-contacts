@@ -9,13 +9,13 @@ type UserDataType = {
 export const getAuth = (userName: string) => {
     const localStorageData = localStorage.getItem(userName);
     let userData: UserDataType;
-    if (localStorageData) {
+    if (localStorageData) { //If record exist, simply parse it
         userData = JSON.parse(localStorageData)
-    } else {
+    } else { //If no such record exist, create a new user with key as userName
         userData = {userId: Date.now(), userName: userName, contactList: []}
         localStorage.setItem(userName, JSON.stringify(userData));
     }
-    localStorage.setItem("AuthUserName", userName);
+    localStorage.setItem("AuthUserName", userName); //Set last authenticated userName
     return {
         type: 'GET_AUTH' as const,
         payload: userData,
@@ -29,7 +29,7 @@ export const checkAuth = () => {
 }
 
 export const signOut = () => {
-    localStorage.removeItem("AuthUserName");
+    localStorage.removeItem("AuthUserName"); //Clear last authenticated userName
     return {
         type: 'SIGN_OUT' as const
     }
@@ -37,14 +37,15 @@ export const signOut = () => {
 
 export const createNewContact = (contactName: string, contactPhone: string) => {
     const storeData = store.getState().AuthReducer;
-    const contactImageId = Math.floor(Math.random() * 350) + 1;
+    const id = Date.now(); //Get unique userID
+    const contactImageId = Math.floor(Math.random() * 350) + 1; //Get random number for imageId
 
     localStorage.setItem(storeData.userName, JSON.stringify(
         {
             ...storeData, contactList: [
                 ...storeData.contactList,
                 {
-                    id: Date.now(),
+                    id: id,
                     contactName: contactName,
                     contactPhone: contactPhone,
                     contactImageId: contactImageId
@@ -54,7 +55,7 @@ export const createNewContact = (contactName: string, contactPhone: string) => {
     ));
     return {
         type: 'CREATE_NEW_CONTACT' as const,
-        payload: {contactName, contactPhone, contactImageId}
+        payload: {id, contactName, contactPhone, contactImageId}
     };
 }
 

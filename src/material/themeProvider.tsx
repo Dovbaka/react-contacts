@@ -19,6 +19,19 @@ const OverridesCss: React.FunctionComponent = ({ children }) => {
             },
         },
         typography: {
+            h1: {
+                fontFamily: 'Nunito Sans',
+                fontStyle: 'normal',
+                fontWeight: 900,
+                fontSize: '32px',
+                lineHeight: '44px',
+                '@media (max-width:960px)': {
+                    fontSize: '26px',
+                },
+                '@media (max-width:600px)': {
+                    fontSize: '18px',
+                },
+            },
             h2: {
                 fontFamily: 'Nunito Sans',
                 fontStyle: 'normal',

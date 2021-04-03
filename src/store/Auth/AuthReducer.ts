@@ -38,7 +38,7 @@ export const AuthReducer = (
                 contactList: [
                     ...state.contactList,
                     {
-                        id: Date.now(),
+                        id: action.payload.id,
                         contactName: action.payload.contactName,
                         contactPhone: action.payload.contactPhone,
                         contactImageId: action.payload.contactImageId
@@ -50,7 +50,6 @@ export const AuthReducer = (
                 ...state,
                 contactList: [
                     ...state.contactList.map(todo => {
-                        debugger
                         if (todo.id === action.payload.contactId) {
                             todo.contactName = action.payload.contactName;
                             todo.contactPhone = action.payload.contactPhone;

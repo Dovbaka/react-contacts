@@ -10,14 +10,17 @@ import {useFormik} from "formik";
 
 type PropsType = {
     onClose: () => void,
-    contactAction: any,
-    mode: "create" | "edit"
+    contactAction: (...args: any[]) => void,
+    mode: "create" | "edit" //Set component functionality to create or edit contact
     contactName?: string
     contactPhone?: string
 }
+
 const UpdateContact = (props: PropsType) => {
     const location = useLocation();
+    //Get userId from current url
     const userId = Number(location.pathname.replaceAll(/[^0-9]/g, ''));
+    //Get contact name and phone from store by userId
     const contactData = store.getState().AuthReducer.contactList.find(el => el.id === userId);
 
     const validate = (values: { contactName: string, contactPhone: string }) => {
@@ -46,6 +49,7 @@ const UpdateContact = (props: PropsType) => {
         validateOnChange: false,
         validateOnBlur: true,
         onSubmit: () => {
+            //Call action according to mode
             if (props.mode === "create") props.contactAction(formik.values.contactName, formik.values.contactPhone);
             else props.contactAction(userId, formik.values.contactName, formik.values.contactPhone);
             props.onClose();
@@ -59,7 +63,9 @@ const UpdateContact = (props: PropsType) => {
                   className={classes.contactContainer}>
                 <Grid item className={classes.titleGridItem}>
                     <Typography variant={"h2"}
-                                align={"center"}>{props.mode === "create" ? "New contact" : "Edit contact"}</Typography>
+                                align={"center"}>
+                        {props.mode === "create" ? "New contact" : "Edit contact"}
+                    </Typography>
                 </Grid>
                 <Grid item className={classes.inputGridItem}>
                     <CustomInput placeholder={"Contact Name"}

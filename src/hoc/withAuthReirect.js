@@ -9,7 +9,7 @@ let mapStateToPropsForRedirect = (state) => {
 };
 
 export const withAuthRedirect = (Component) => {
-    //HOC for redirecting to login screen if user not authorized
+    //HOC for redirecting to login screen if user authorized
     class RedirectComponent extends React.Component {
         render() {
             if (this.props.userName) return <Redirect to={'/'}/>;
